@@ -1,0 +1,112 @@
+{% load static %}
+<html>
+    <head>
+        <title>Ubah Film | APLIKASI DAFTAR FILM BIOSKOP</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" name="viewport">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="{% static 'movies/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'movies/dist/css/AdminLTE.min.css' %}">
+        <link rel="stylesheet" href="{% static 'movies/dist/css/skins/_all-skins.min.css' %}">
+        <script src="{% static 'movies/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'movies/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+        <script src="{% static 'movies/dist/js/app.min.js' %}"></script>
+        <script src="{% static 'movies/dist/js/demo.js' %}"></script>
+		<style>
+			.bek {
+				  background-image: url("{% static 'movies/dist/img/marvel.jpg' %}");
+				  height: 100%; 
+				  background-position: center;
+				  background-repeat: no-repeat;
+				  background-size: cover;
+			}
+		</style>
+<body class="skin-purple-light layout-top-nav">
+<table width="100%" style="border-bottom:1px solid #9966cc; background-color:black;">
+<tr>
+	<td style="text-align:left; padding:10px;" width="90%" class="back-img">
+		<h4 style="text-align:center; font-size:18px; color:white;"><b>APLIKASI DAFTAR FILM BIOSKOP<br>
+		</b></h4>
+	</td>
+</tr>
+</table>
+<div class="bek"> 
+	<div class="wrapper" style="background-color: rgba(247, 247, 247, 0.7);"> 
+		<div class="content-wrapper" style="background-color: rgba(247, 247, 247, 0.7);">
+			<div class="container">
+				<div class="row">
+						<section class="content-header">
+							<div class="col-md-12">
+							<h1>
+							  <br>
+							</h1>
+							<ol class="breadcrumb" style="background-color: rgba(247, 247, 247, 0.9);">
+							  <li><a href="{% url 'movies_index' %}"><i class="fa fa-dashboard"></i>Daftar Film</a></li>
+							  <li class="active">Ubah Film</li>
+							</ol>
+							</div>
+						</section>
+						<section class="content">
+						<form id="edit_form" method="POST" action="{% url 'movies_edit' movie.id %}">
+							{% csrf_token %}
+							<div class="col-md-8">
+								<div class="form-group">
+									<label for="title">Judul</label>
+									<input type="text" name="title" class="form-control" value="{{ movie.title }}" />
+								</div>
+								
+								<div class="form-group">
+									<label for="synopsis">Sinopsis</label>
+									<textarea name="synopsis" rows="2" class="form-control" >{{ movie.synopsis }}</textarea>
+								</div>
+
+								<div class="form-group">
+									<label for="actors">Aktor</label>
+									<input type="text" name="actors" class="form-control" value="{{ movie.actors }}" />    
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="genre">Genre</label>
+									<select name="genre" class="form-control" required >
+											<option value="{{ movie.genre }}">{{ movie.genre }}</option>
+											<option value="Aksi">Aksi</option>
+											<option value="Petualangan">Petualangan</option>
+											<option value="Komedi">Komedi</option>
+											<option value="Kriminal">Kriminal</option>
+											<option value="Drama">Drama</option>
+											<option value="Epik">Epik</option>
+											<option value="Fiksi ilmiah">Fiksi ilmiah</option>
+											<option value="Horor">Horor</option>
+											<option value="Jagal">Jagal</option>
+											<option value="Musikal">Musikal</option>
+											<option value="Perang">Perang</option>
+										</select>
+								</div>
+								<div class="form-group">
+									<label for="duration">Durasi</label>
+									<input type="number" name="duration" class="form-control" value="{{ movie.duration }}" />
+									<small class="form-text text-muted">Dalam menit</small>
+								</div>
+								<div class="form-group">
+									<label for="rate">Rating</label>
+									<input type="number" min=1 max=10 name="rate" class="form-control" value="{{ movie.rate }}" />
+									<small class="form-text text-muted">1 sampai 10</small>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<a class="btn btn-primary" href="{% url 'movies_index' %}">Kembali</a>
+								<button type="submit" class="btn btn-success">Simpan</button>
+							</div>
+						</form>
+					 </section>	
+				</div>
+			</div>
+		</div>
+		<footer class="main-footer" style="text-align:center;">
+			<strong>Copyright &copy; 2020
+		</footer>
+	</div>
+</div>
+</body>
+</html>

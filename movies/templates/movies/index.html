@@ -1,0 +1,113 @@
+{% load static %}
+<html>
+    <head>
+        <title>Daftar Film  | APLIKASI DAFTAR FILM BIOSKOP</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" name="viewport">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="{% static 'movies/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'movies/dist/css/AdminLTE.min.css' %}">
+        <link rel="stylesheet" href="{% static 'movies/dist/css/skins/_all-skins.min.css' %}">
+        <script src="{% static 'movies/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'movies/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+        <script src="{% static 'movies/dist/js/app.min.js' %}"></script>
+        <script src="{% static 'movies/dist/js/demo.js' %}"></script>
+		<style>
+			.bek {
+				  background-image: url("{% static 'movies/dist/img/marvel.jpg' %}");
+				  height: 100%; 
+				  background-position: center;
+				  background-repeat: no-repeat;
+				  background-size: cover;
+			}
+		</style>
+<body class="skin-purple-light layout-top-nav">
+<table width="100%" style="border-bottom:1px solid #9966cc; background-color:black;">
+<tr>
+	<td style="text-align:left; padding:10px;" width="90%" class="back-img">
+		<h4 style="text-align:center; font-size:18px; color:white;"><b>APLIKASI DAFTAR FILM BIOSKOP<br>
+		</b></h4>
+	</td>
+</tr>
+</table>
+<div class="bek">
+	<div class="wrapper" style="background-color: rgba(247, 247, 247, 0.2);"> 
+		<div class="content-wrapper" style="background-color: rgba(247, 247, 247, 0.2);">
+			<div class="container" >
+				<div class="row" >
+						<section class="content-header" >
+							<div class="col-md-12" >
+							<h1>
+							  <br>
+							</h1>
+							<ol class="breadcrumb"  style="background-color: rgba(247, 247, 247, 0.8);">
+							  <li class="active"><a href="{% url 'movies_index' %}"><i class="fa fa-dashboard"></i>Daftar Film</a></li>
+							</ol>
+							{% if 'edit' in message %}
+							<div class="alert alert-success" role="alert">
+								Film #{{ message_id }} berhasil disimpan!
+							</div>
+							{% endif %}
+
+							{% if 'delete' in message %}
+								<div class="alert alert-danger" role="alert">
+									Film #{{ message_id }} berhasil dihapus!
+								</div>
+							{% endif %}
+							</div>
+						</section>
+						<section class="content">
+							<div class="col-md-12">
+								<div class="box"  style="background-color: rgba(247, 247, 247, 0.9);">
+									<div class="box-header">
+										<h3 class="box-title">
+										<label>
+										<a class="btn btn-primary" href="{% url 'movies_create' %}">Tambah Film Baru</a>
+										</label>
+										</h3>
+									</div>
+									<div class="box-body">
+										<table id="datatable" class="table table-bordered table-striped display responsive nowrap" cellspacing="0" width="100%">
+											<thead>
+												<tr>
+													<th>#</th><th>Judul</th><th>Genre</th><th>Durasi</th><th>Rating</th><th width="10%">Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for movie in movies %}
+												<tr>
+													<th>{{ movie.id }}</th>
+													<td>{{ movie.title }}</td>
+													<td>{{ movie.genre }}</td>
+													<td>{{ movie.duration }} Menit</td>
+													<td>{{ movie.rate }}/10 </td>
+													<td>
+														<a class="btn btn-xs btn-info" href="{% url 'movies_view' movie.id %}">Detail</a>
+														<a class="btn btn-xs btn-warning" href="{% url 'movies_edit' movie.id %}">Ubah</a>
+														<a class="btn btn-xs btn-danger" href="{% url 'movies_delete' movie.id %}">Hapus</a>
+													</td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+					 </section>	
+				</div>
+			</div>
+		</div>
+		<footer class="main-footer" style="text-align:center;">
+			<strong>Copyright &copy; 2020
+		</footer>
+	</div>
+</div>
+<script src="{% static 'movies/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<script src="{% static 'movies/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'movies/plugins/datatables/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'movies/plugins/datatables/dataTables.responsive.min.js' %}"></script>
+<script>
+$('#datatable').DataTable();
+</script>
+</body>
+</html>
